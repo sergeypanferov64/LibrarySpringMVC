@@ -1,0 +1,50 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+            http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/orders/**" access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/order/**" access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/users/**" access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/user/**" access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/newUser/**" access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/newBook/**" access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/newAuthor/**" access="hasRole('ROLE_MANAGER')" />
+        <intercept-url pattern="/member/**" access="hasRole('ROLE_MEMBER')" />
+        <intercept-url pattern="/books/**" access="isAuthenticated()" />
+        <intercept-url pattern="/book/**" access="isAuthenticated()" />
+        <access-denied-handler error-page="/403" />
+        <form-login login-page="/login" default-target-url="/home" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
+        <logout logout-success-url="/login?logout"/>
+        <csrf/>
+    </http>
+    
+            
+    <authentication-manager>
+        <authentication-provider user-service-ref="myUserDetailsService" >
+            <password-encoder hash="bcrypt" />    
+        </authentication-provider>
+    </authentication-manager>
+    
+    
+    <!-- TEST VERSION OF AUTHENTICATION MANAGER-->
+    <!--
+    <user-service id="userService">
+        <user name="user1" password="password1" authorities="ROLE_ADMIN"/>
+        <user name="user2" password="password2" authorities="ROLE_USER"/>
+        <user name="user3" password="password3" authorities="ROLE_ADMIN"/>
+    </user-service>
+    
+    <authentication-manager>
+        <authentication-provider user-service-ref="userService" />
+    </authentication-manager>
+    -->
+    
+    
+    
+</beans:beans>
