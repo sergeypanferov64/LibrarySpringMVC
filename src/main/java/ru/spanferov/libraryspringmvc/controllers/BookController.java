@@ -45,42 +45,62 @@ public class BookController {
     public ModelAndView editBookForm(@RequestParam(value = "bookId", required = true) int id, @RequestParam(value = "operation", required = true) String operation, ModelAndView model, RedirectAttributes redirectAttrs) {
 
         if (operation.equals("show")) {
-            model.addObject("book", getBookService().getBookById(id));
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            model.addObject("avaliableCode", getBookService().getBookAvaliableCodeForUser(id, email));
-            model.addObject("NumberOfAllBookInstances", getBookService().getNumberOfAllBookInstances(id));
-            model.addObject("NumberOfFreeBookInstances", getBookService().getNumberOfFreeBookInstances(id));
-            model.addObject("NumberOfLockedBookInstances", getBookService().getNumberOfLockedBookInstances(id));
-            model.setViewName("book");
-            return model;
+            return createShowBookModel(model, id);
         } else if (operation.equals("edit")) {
-            model.addObject("book", bookService.getBookById(id));
-            model.addObject("author", new Author());
-            model.addObject("authorsList", bookService.getAuthorsList());
-            model.setViewName("bookForm");
-            return model;
+            return createEditBookModel(model, id);
         } else if (operation.equals("delete")) {
-            bookService.deleteBookById(id);
-            model.setViewName("redirect:/books");
-            return model;
+            return createDeleteBookModel(id, model);
         } else if (operation.equals("newInstance")) {
-            bookService.createNewBookInstanve(id);
-            redirectAttrs.addAttribute("bookId", id);
-            redirectAttrs.addAttribute("operation", "show");
-            model.setViewName("redirect:/book");
-            return model;
+            return createNewInstanceModel(id, redirectAttrs, model);
         } else if (operation.equals("lock")) {
-            String email = SecurityContextHolder.getContext().getAuthentication().getName();
-            bookService.lockBock(id, email);
-            redirectAttrs.addAttribute("bookId", id);
-            redirectAttrs.addAttribute("operation", "show");
-            model.setViewName("redirect:/book");
-            return model;
+            return createLockBookModel(id, redirectAttrs, model);
         } else {
             model.setViewName("redirect:/books");
             return model;
         }
 
+    }
+
+    private ModelAndView createLockBookModel(int id, RedirectAttributes redirectAttrs, ModelAndView model) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        bookService.lockBock(id, email);
+        redirectAttrs.addAttribute("bookId", id);
+        redirectAttrs.addAttribute("operation", "show");
+        model.setViewName("redirect:/book");
+        return model;
+    }
+
+    private ModelAndView createNewInstanceModel(int id, RedirectAttributes redirectAttrs, ModelAndView model) {
+        bookService.createNewBookInstanve(id);
+        redirectAttrs.addAttribute("bookId", id);
+        redirectAttrs.addAttribute("operation", "show");
+        model.setViewName("redirect:/book");
+        return model;
+    }
+
+    private ModelAndView createDeleteBookModel(int id, ModelAndView model) {
+        bookService.deleteBookById(id);
+        model.setViewName("redirect:/books");
+        return model;
+    }
+
+    private ModelAndView createEditBookModel(ModelAndView model, int id) {
+        model.addObject("book", bookService.getBookById(id));
+        model.addObject("author", new Author());
+        model.addObject("authorsList", bookService.getAuthorsList());
+        model.setViewName("bookForm");
+        return model;
+    }
+
+    private ModelAndView createShowBookModel(ModelAndView model, int id) {
+        model.addObject("book", getBookService().getBookById(id));
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addObject("avaliableCode", getBookService().getBookAvaliableCodeForUser(id, email));
+        model.addObject("NumberOfAllBookInstances", getBookService().getNumberOfAllBookInstances(id));
+        model.addObject("NumberOfFreeBookInstances", getBookService().getNumberOfFreeBookInstances(id));
+        model.addObject("NumberOfLockedBookInstances", getBookService().getNumberOfLockedBookInstances(id));
+        model.setViewName("book");
+        return model;
     }
 
     @RequestMapping(value = {"/newBook"}, method = RequestMethod.GET)

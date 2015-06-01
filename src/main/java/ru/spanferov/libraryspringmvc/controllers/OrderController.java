@@ -38,20 +38,28 @@ public class OrderController {
     public ModelAndView orderOperation(@RequestParam(value = "orderId", required = true) int id, @RequestParam(value = "operation", required = true) String operation, ModelAndView model, RedirectAttributes redirectAttrs) {
 
         if (operation.equals("show")) {
-            model.addObject("order", orderService.getOrderById(id));
-            model.setViewName("order");
-            return model;
+            return createShowOrderModel(model, id);
         } else if (operation.equals("nextStatus")) {
-            orderService.nextStatus(id);
-            model.addObject("orderId", id);
-            model.addObject("operation", "show");
-            model.setViewName("redirect:/order");
-            return model;
+            return createNextStatusOrderModel(id, model);
         } else {
             model.setViewName("redirect:/contacts");
             return model;
         }
 
+    }
+
+    private ModelAndView createNextStatusOrderModel(int id, ModelAndView model) {
+        orderService.nextStatus(id);
+        model.addObject("orderId", id);
+        model.addObject("operation", "show");
+        model.setViewName("redirect:/order");
+        return model;
+    }
+
+    private ModelAndView createShowOrderModel(ModelAndView model, int id) {
+        model.addObject("order", orderService.getOrderById(id));
+        model.setViewName("order");
+        return model;
     }
 
 }

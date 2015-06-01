@@ -68,25 +68,37 @@ public class UserController {
     public ModelAndView editBookForm(@RequestParam(value = "userId", required = true) int id, @RequestParam(value = "operation", required = true) String operation, ModelAndView model, RedirectAttributes redirectAttrs) {
 
         if (operation.equals("show")) {
-            model.addObject("user", userService.getUserById(id));
-            model.setViewName("user");
-            return model;
+            return createShowUserModel(model, id);
         } else if (operation.equals("edit")) {
-            User user = userService.getUserById(id);
-            user.setPassword("");
-            model.addObject("user", user);
-            model.addObject("roles", userService.getUserRoles());
-            model.setViewName("userForm");
-            return model;
+            return createEditUserModel(id, model);
         } else if (operation.equals("delete")) {
-            userService.deleteUserById(id);
-            model.setViewName("redirect:/users");
-            return model;
+            return createDeleteUserModel(id, model);
         } else {
             model.setViewName("redirect:/users");
             return model;
         }
 
+    }
+
+    private ModelAndView createDeleteUserModel(int id, ModelAndView model) {
+        userService.deleteUserById(id);
+        model.setViewName("redirect:/users");
+        return model;
+    }
+
+    private ModelAndView createEditUserModel(int id, ModelAndView model) {
+        User user = userService.getUserById(id);
+        user.setPassword("");
+        model.addObject("user", user);
+        model.addObject("roles", userService.getUserRoles());
+        model.setViewName("userForm");
+        return model;
+    }
+
+    private ModelAndView createShowUserModel(ModelAndView model, int id) {
+        model.addObject("user", userService.getUserById(id));
+        model.setViewName("user");
+        return model;
     }
 
     @InitBinder

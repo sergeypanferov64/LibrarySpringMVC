@@ -3,7 +3,6 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
-
 <tiles-definitions>
     
     <definition name="baseLayout" template="/views/template/BaseLayout.jsp">
@@ -16,24 +15,14 @@
     
     <definition name="home" extends="baseLayout">
         <put-attribute name="title"  value="Home Page"/>
-        <put-attribute name="body"   value="/views/AboutUs.jsp"/>     
+        <put-attribute name="body"   value="/views/aboutUs.jsp"/>     
     </definition>
     
     <definition name="contacts" extends="baseLayout">
         <put-attribute name="title"  value="Contacts Page"/>
-        <put-attribute name="body"   value="/views/Contacts.jsp"/>     
+        <put-attribute name="body"   value="/views/contacts.jsp"/>     
     </definition>
     
-    <definition name="manager" extends="baseLayout">
-        <put-attribute name="title"  value="Manager Page"/>
-        <put-attribute name="body"   value="/views/Manager.jsp"/>     
-    </definition>
-    
-    <definition name="member" extends="baseLayout">
-        <put-attribute name="title"  value="Manager Page"/>
-        <put-attribute name="body"   value="/views/Member.jsp"/>     
-    </definition>
-
     <definition name="login" extends="baseLayout">
         <put-attribute name="title"  value="Login Page"/>
         <put-attribute name="body"   value="/views/login.jsp"/>     
@@ -42,6 +31,11 @@
     <definition name="403" extends="baseLayout">
         <put-attribute name="title"  value="Acces Denied"/>
         <put-attribute name="body"   value="/views/403.jsp"/>     
+    </definition>
+    
+    <definition name="member" extends="baseLayout">
+        <put-attribute name="title"  value="Member Home Page"/>
+        <put-attribute name="body"   value="/views/member.jsp"/>     
     </definition>
     
     <definition name="books" extends="baseLayout">
@@ -55,37 +49,33 @@
     </definition>
     
     <definition name="bookForm" extends="baseLayout">
-        <put-attribute name="title"  value="Library3"/>
+        <put-attribute name="title"  value="Library"/>
         <put-attribute name="body"   value="/views/bookForm.jsp"/>     
     </definition>
     
-    <definition name="userForm" extends="baseLayout">
-        <put-attribute name="title"  value="Library3"/>
-        <put-attribute name="body"   value="/views/userForm.jsp"/>     
-    </definition>
-    
-    
     <definition name="users" extends="baseLayout">
-        <put-attribute name="title"  value="Library3"/>
+        <put-attribute name="title"  value="Library"/>
         <put-attribute name="body"   value="/views/users.jsp"/>     
     </definition>
     
     <definition name="user" extends="baseLayout">
-        <put-attribute name="title"  value="Library3"/>
+        <put-attribute name="title"  value="Library"/>
         <put-attribute name="body"   value="/views/user.jsp"/>     
     </definition>
-    
+
+    <definition name="userForm" extends="baseLayout">
+        <put-attribute name="title"  value="Library"/>
+        <put-attribute name="body"   value="/views/userForm.jsp"/>     
+    </definition>
     
     <definition name="orders" extends="baseLayout">
-        <put-attribute name="title"  value="Library3"/>
+        <put-attribute name="title"  value="Library"/>
         <put-attribute name="body"   value="/views/orders.jsp"/>     
     </definition>
     
     <definition name="order" extends="baseLayout">
-        <put-attribute name="title"  value="Library3"/>
+        <put-attribute name="title"  value="Library"/>
         <put-attribute name="body"   value="/views/order.jsp"/>     
     </definition>
 
-
 </tiles-definitions>
-

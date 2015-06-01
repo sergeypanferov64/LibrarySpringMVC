@@ -13,14 +13,10 @@
             <td>Авторы</td>
         </tr>
         <c:forEach items="${memberHomeBooks}" var="book" varStatus="booksStatus">
-
-
             <s:url value="book" var="bookURL">
                 <s:param name='bookId' value="${book.id}"/>
                 <s:param name='operation' value="show"/>
             </s:url>
-
-
             <tr>
                 <td>
                     <b><c:out value="${booksStatus.count}"/></b>
@@ -43,11 +39,6 @@
     <p>У Вас нет ни одной нашей книги</p>    
 </c:if>
 
-
-
-
-
-
 <c:if test="${memberLockedBooks.size() != 0}">
     <table class="table table-bordered table-hover">
         <caption>Книги, которые Вы отложили чтобы взять на чтение</caption>
@@ -57,14 +48,10 @@
             <td>Авторы</td>
         </tr>
         <c:forEach items="${memberLockedBooks}" var="book" varStatus="booksStatus">
-
-
             <s:url value="book" var="bookURL">
                 <s:param name='bookId' value="${book.id}"/>
                 <s:param name='operation' value="show"/>
             </s:url>
-
-
             <tr>
                 <td>
                     <b><c:out value="${booksStatus.count}"/></b>
@@ -86,9 +73,3 @@
 <c:if test="${memberLockedBooks.size() == 0}">
     <p>У Вас нет ни одной отложенной книги</p>    
 </c:if>
-
-
-
-
-
-

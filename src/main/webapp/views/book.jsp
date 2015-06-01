@@ -45,17 +45,3 @@
     <h4>На складе <c:out value="${NumberOfFreeBookInstances}"/> штук</h4>
     <h4>На руках <c:out value="${NumberOfLockedBookInstances}"/> штук</h4>
 </div>
-
-<%--<s:div>
-    <s:if test = '%{#session.role == ("member")}'>
-        <s:if test = "%{avaliableCode == 0}">
-            <s:form action='LockBook'>
-                <s:hidden name="id" value="%{book.id}" />
-                <s:submit value="Отложить"/>
-            </s:form>
-        </s:if>
-        <s:else>
-            <p> book is not avaliable code = <s:property value="avaliableCode"/></p>
-        </s:else>
-    </s:if>
-</s:div>--%>

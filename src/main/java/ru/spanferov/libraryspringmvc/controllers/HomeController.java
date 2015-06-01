@@ -42,7 +42,6 @@ public class HomeController {
 
         if (logout != null) {
             model.addObject("msg", "You've been logged out successfully.");
-            System.out.println("POINT LOGOUT");
         }
 
         model.setViewName("login");
@@ -78,7 +77,6 @@ public class HomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
             UserDetails userDetail = (UserDetails) auth.getPrincipal();
-            System.out.println(userDetail);
             model.addObject("username", userDetail.getUsername());
         }
         model.setViewName("403");

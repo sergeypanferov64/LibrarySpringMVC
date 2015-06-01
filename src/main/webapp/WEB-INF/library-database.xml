@@ -56,9 +56,8 @@
         </property>
  
     </bean>
-    
-    
-    
+
+        
     <!-- MUST have transaction manager, using aop and aspects  -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"></property>
@@ -76,13 +75,6 @@
         <aop:pointcut id="userServicePointCut" expression="execution(* ru.spanferov.library.service.*Service.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="userServicePointCut" />
     </aop:config>
-    
-    
-    
-    
-    
-    
-    
     
     
     <!-- INJECTIONS START -->
@@ -111,14 +103,12 @@
     <bean id="orderService" class="ru.spanferov.library.service.OrderService">
         <property name="orderDAO" ref="orderDAO" />
     </bean>
-
     
     <bean id="userService" class="ru.spanferov.library.service.UserService">
         <property name="userDAO" ref="userDAO" />
     </bean>
 
     <!-- INJECTIONS END -->
-    
-    
+   
     
 </beans>

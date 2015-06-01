@@ -69,14 +69,3 @@
     </security:authorize>
 
 </ul>
-
-
-<!-- 
-<input type='hidden' id='activeTabHref' value='${activeTab}' />
-
-<script type="text/javascript">
-    $(function() {
-        $('[href=' + $('activeTabHref').val() + ']').class('');
-    });
-</script>
--->
