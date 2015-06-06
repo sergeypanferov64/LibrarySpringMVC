@@ -12,10 +12,6 @@ public class UserService {
     private UserDAO userDAO;
     private String[] roles = {"ROLE_MEMBER", "ROLE_MANAGER"};
 
-    public UserDAO getUserDAO() {
-        return userDAO;
-    }
-
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
